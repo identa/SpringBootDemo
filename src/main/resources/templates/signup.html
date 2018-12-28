@@ -5,16 +5,41 @@
     <title>Title</title>
 </head>
 <body>
-<form th:action="@{/success}" role="form" method="post" th:object="${user}">
+<form th:action="@{/success}" role="form" method="post" th:object="${user}" id="form">
 
     <div class="form-group">
-        <label class="form-label">First name</label>
+        <label class="form-label">Username</label>
         <input th:field="*{username}" name="username" type="text" id="username" class="form-control"/>
     </div>
+
     <div class="form-group">
-        <label class="form-label">Last name</label>
+        <label class="form-label">Password</label>
         <input th:field="*{password}" name="password" type="password" id="password" class="form-control"/>
     </div>
+
+    <div class="form-group">
+        <label class="form-label">Retype Password</label>
+        <input name="re-password" type="password" id="re-password" class="form-control"/>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">DOB</label>
+        <input th:field="*{dob}" name="dob" type="date" id="dob" class="form-control"/>
+    </div>
+    <div class="form-group">
+        <label for="menu">Example select</label>
+        <select class="form-control" id="menu" form="form" th:field="*{gender}">
+            <option th:value="0" th:text="Female"></option>
+            <option th:value="1" th:text="Male"></option>
+            <option th:value="2" th:text="Other"></option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label class="form-label">Email</label>
+        <input th:field="*{email}" name="email" type="email" id="email" class="form-control"/>
+    </div>
+
     <button type="submit">sign up</button>
 </form>
 </body>
