@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class SignInController {
 
@@ -28,15 +30,15 @@ public class SignInController {
     @PostMapping("success1")
     public String success(@RequestParam("username") String username,
                           @RequestParam("password") String password,
-                          Model model) {
-        int checkResult = userService.checkSignin(username,password);
-        if (checkResult == 0){
+                          Model model, HttpSession session) {
+        int checkResult = userService.checkSignin(username, password);
+        if (checkResult == 0) {
             model.addAttribute("error", "Incorrect username or password");
             return "signin";
-        }
-        else {
+        } else {
             model.addAttribute("message", "Success");
-            return "success";
+            session.setAttribute("UserName", username);
+            return "redirect:/product";
         }
-            }
+    }
 }

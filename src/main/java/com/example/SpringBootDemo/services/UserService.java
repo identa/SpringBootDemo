@@ -35,10 +35,6 @@ public class UserService implements SignUpConst {
         return matcher.matches();
     }
 
-//    public boolean isAllInputFilled(UserEntity userEntity, String rePassword){
-//        if (userEntity.getUsername())
-//    }
-
     public boolean isPasswordChecked(String password, String rePassword){
         return password.equals(rePassword) ? true : false;
     }

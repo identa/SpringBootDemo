@@ -4,13 +4,16 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
+@Table(name = "user")
 public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Column(name = "user_id")
+    private int userId;
 
     private String username;
 
@@ -24,15 +27,18 @@ public class UserEntity {
 
     private int gender;
 
+    @OneToMany(mappedBy = "userEntity")
+    private List<ProductEntity> productEntityList;
+
     public UserEntity() {
     }
 
-    public int getId() {
-        return id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {
@@ -59,6 +65,14 @@ public class UserEntity {
         this.dob = dob;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public int getGender() {
         return gender;
     }
@@ -67,11 +81,11 @@ public class UserEntity {
         this.gender = gender;
     }
 
-    public String getEmail() {
-        return email;
+    public List<ProductEntity> getProductEntityList() {
+        return productEntityList;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setProductEntityList(List<ProductEntity> productEntityList) {
+        this.productEntityList = productEntityList;
     }
 }
