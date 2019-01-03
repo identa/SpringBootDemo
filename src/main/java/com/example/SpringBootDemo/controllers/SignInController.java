@@ -32,20 +32,15 @@ public class SignInController {
     @PostMapping("success1")
     public String success(@RequestParam("username") String username,
                           @RequestParam("password") String password,
-                          @RequestParam("remember-me-status") String rememberMe,
                           Model model,
-                          HttpSession session,
-                          HttpServletResponse response) {
+                          HttpSession session) {
         int checkResult = userService.checkSignin(username, password);
         if (checkResult == 0) {
             model.addAttribute("error", "Incorrect username or password");
             return "signin";
         } else {
             model.addAttribute("message", "Success");
-            if (userService.isRememberMeChecked(rememberMe)){
-                userService.rememberMe(password, response);
-            }
-            else session.setAttribute("UserName", username);
+            session.setAttribute("UserName", username);
             return "redirect:/product";
         }
     }

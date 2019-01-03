@@ -9,6 +9,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <body>
+<h1 th:text="${error}"></h1>
 <div class="container">
     <h2>Signup form</h2>
     <form class="form-horizontal" th:action="@{/success}" role="form" method="post" th:object="${user}" id="form">
