@@ -15,19 +15,18 @@ public class UserService implements SignUpConst {
     @Autowired
     UserRepo userRepo;
 
-    public int checkSignin(String username, String password){
+    public int checkSignin(String username, String password) {
         UserEntity userEntity = userRepo.findByUsernameAndPassword(username, password);
-        if (userEntity == null) {
-            return 0;
-        } else return 1;
+        if (userEntity == null) return 0;
+        else return 1;
     }
 
-    public boolean isUsernameOrEmailExist(String username, String email){
-        UserEntity userEntity = userRepo.findByUsernameOrEmail(username,email);
+    public boolean isUsernameOrEmailExist(String username, String email) {
+        UserEntity userEntity = userRepo.findByUsernameOrEmail(username, email);
         return userEntity == null ? true : false;
     }
 
-    public boolean isPasswordFormatCorrect(String password){
+    public boolean isPasswordFormatCorrect(String password) {
         Pattern pattern;
         Matcher matcher;
         pattern = Pattern.compile(PASSWORD_REGEX);
@@ -35,7 +34,7 @@ public class UserService implements SignUpConst {
         return matcher.matches();
     }
 
-    public boolean isPasswordChecked(String password, String rePassword){
+    public boolean isPasswordChecked(String password, String rePassword) {
         return password.equals(rePassword) ? true : false;
     }
 }
