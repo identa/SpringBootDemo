@@ -45,7 +45,7 @@ public class SignUpController {
                 return "success";
             }
         } else {
-            model.addAttribute("user", "Error usr n em");
+            model.addAttribute("user", "Incorrect username and email");
             return "success";
         }
     }
