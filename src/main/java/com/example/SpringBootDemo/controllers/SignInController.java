@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -30,14 +32,20 @@ public class SignInController {
     @PostMapping("success1")
     public String success(@RequestParam("username") String username,
                           @RequestParam("password") String password,
-                          Model model, HttpSession session) {
+                          @RequestParam("remember-me-status") String rememberMe,
+                          Model model,
+                          HttpSession session,
+                          HttpServletResponse response) {
         int checkResult = userService.checkSignin(username, password);
         if (checkResult == 0) {
             model.addAttribute("error", "Incorrect username or password");
             return "signin";
         } else {
             model.addAttribute("message", "Success");
-            session.setAttribute("UserName", username);
+            if (userService.isRememberMeChecked(rememberMe)){
+                userService.rememberMe(password, response);
+            }
+            else session.setAttribute("UserName", username);
             return "redirect:/product";
         }
     }

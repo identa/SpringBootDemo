@@ -6,6 +6,8 @@ import com.example.SpringBootDemo.repositories.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,6 +38,16 @@ public class UserService implements SignUpConst {
 
     public boolean isPasswordChecked(String password, String rePassword) {
         return password.equals(rePassword) ? true : false;
+    }
+
+    public boolean isRememberMeChecked(String rememberMe){
+        return  (rememberMe == "true") ? true : false;
+    }
+
+    public void rememberMe(String password, HttpServletResponse response){
+        Cookie cookie = new Cookie("cookie", password);
+        cookie.setMaxAge(100000);
+        response.addCookie(cookie);
     }
 }
 
